@@ -1,0 +1,21 @@
+PACKAGES
+React Router - define routes
+React -icons - icon packs
+React-toastify 
+React-spinner
+React-loader
+React-hook-form
+Zod
+Axios
+Tailwindcss - for styling. 
+Socket.io-client
+AI - claud/Groq
+Framer-motion - animation
+
+
+
+
+
+
+/Suggestions
+Rating of doctor (Review)

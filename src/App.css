@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+
+.authBg{
+  background-image: url("../src/assets/Background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+  
+}
