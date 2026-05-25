@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Button from './Button'
 import {Link, useNavigate} from "react-router"
-import Logo from "../assets/MediCare.svg"
+import Logo from "../assets/Medibridge Logo.svg"
 import { HiMenu } from "react-icons/hi";
 
 type Props = {

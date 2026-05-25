@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from "../assets/MediCare.svg"
+import Logo from "../assets/Medibridge Logo.svg"
 
 
 type Props = {

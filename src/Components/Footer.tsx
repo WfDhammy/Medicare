@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
-import Logo from "../assets/MediCare.svg"
-import {Link, useNavigate} from "react-router"
+import React from 'react'
+import Logo from "../assets/Medibridge Logo.svg"
+import {Link,} from "react-router"
 
 export default function Footer() {
    

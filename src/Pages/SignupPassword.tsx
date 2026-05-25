@@ -16,7 +16,7 @@ interface SignupPasswordData{
 interface Error{
   password: string,
   confirmPassword: string,
-  terms: boolean
+  terms: string
 
 
 }
@@ -30,7 +30,7 @@ export default function SignupPassword() {
   const [errors, setErrors] = useState<Error>({
     password: "",
     confirmPassword: "",
-    terms: false
+    terms: ""
 } )
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -53,12 +53,12 @@ export default function SignupPassword() {
 
   const navigate = useNavigate()
 
-  const validateSignupPasswordForm = ()=>{
+  const validateSignupPasswordForm = (): boolean=>{
     const {password, confirmPassword, terms} = signupPasswordData;
     const newErrors : Error ={
       password: "",
       confirmPassword: "",
-      terms: false
+      terms: ""
     };
 
     if (!password) {
@@ -74,7 +74,7 @@ export default function SignupPassword() {
     }
 
     if(!terms){
-      newErrors.terms = true;
+       newErrors.terms = "You must agree to the Terms of Service and Privacy Policy"
 
 
     }
@@ -92,6 +92,7 @@ export default function SignupPassword() {
       confirmPassword: "",
       terms: false
     })
+    navigate("/activateAccount")
     
   }
   
@@ -148,9 +149,12 @@ export default function SignupPassword() {
 
        
         <div className='flex items-center gap-2 mt-4'>
-            <input onChange={handleSignupPasswordChange} id='terms' className='w-5 h-5 cursor-pointer' name='terms' type='checkbox'  />
+            <input onChange={handleSignupPasswordChange} id='terms' checked={signupPasswordData.terms} className='w-5 h-5 cursor-pointer' name='terms' type='checkbox'  />
+            <div className=''>
             <label htmlFor='terms' className='text-[18px]'> I agree to the  <Link className='text-[#28574E]' to="">Terms of Service</Link> and <Link className='text-[#28574E]' to="">Privacy Policy </Link> </label>
-             {errors.terms && <p className='text-red-500 text-sm'>{errors.terms}</p>}
+             {errors.terms && <p className='text-red-500 text-sm mt-1'>{errors.terms}</p>}
+
+            </div>
 
         </div>
        

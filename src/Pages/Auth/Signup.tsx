@@ -1,14 +1,97 @@
-import React from 'react'
+import React, {useState} from 'react'
 import RegisterLayout from '../../Layout/RegisterLayout'
 import Icon from "../../assets/Icon.svg"
 import image from "../../assets/1st signup Image.svg";
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
-type Props = {}
+
+
+interface SignupData{
+  patientId: string,
+  email: string,
+  mNumber: number | string
+}
+interface Error{
+  patientId: string,
+  email: string,
+  mNumber: number | string
+}
+
 
 export default function Signup({}: Props) {
+  const [signupData, setSignupData] = useState<SignupData>({
+    patientId: "",
+    email: "",
+    mNumber: ""
+    
+  })
+  const [errors, setErrors] = useState<Error>({
+    patientId: "",
+    email: "", 
+    mNumber: ""
+  })
+  const navigate = useNavigate()
+
+  const handleSignupChange = (e : React.ChangeEvent<HTMLInputElement>)=>{
+    const {name, value} = e.target;
+
+    setSignupData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const validateSignup = ()=>{
+    const {patientId, email, mNumber} = signupData;
+    const newErrors: Error = {
+      patientId: "",
+      email: "",
+      mNumber: "",
+    };
+
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    const phoneRegex = /^[0-9]{10}$/; 
+
+
+  
+    if(!patientId.trim()){
+      newErrors.patientId = "PatientId is required"
+    }else if (patientId.trim().length < 3) {
+      newErrors.patientId = "Patient ID must be at least 3 characters"
+    }
+
+    if(!email.trim()){
+      newErrors.email = "Email is required"
+    }else if (!emailRegex.test(email)){
+      newErrors.email = "Invalid email address"
+    }
+    
+    if (!mNumber.trim()){
+      newErrors.mNumber = "Registered Phone Number is required"
+    }else if(!phoneRegex.test(mNumber.toString())){
+      newErrors.mNumber = "Invalid mobile number (10 digits required)"
+    }
+
+
+    setErrors(newErrors);
+    return Object.values(newErrors).every(error => error === "")
+  }
+
+  const handleSignupSubmit = (event : React.FormEvent<HTMLFormElement>)=>{
+    event.preventDefault();
+    if(!validateSignup())return;
+    console.log("Form Submitted", signupData);
+    setSignupData({
+      patientId: "",
+      email: "",
+      mNumber: ""
+    })
+    navigate("/signupVerifyCode")
+  }
+
+
   return (
     <RegisterLayout image={image} heading="Access your care anytime" subHeading='Manage appointments, view medical information, chat with your care team, and receive support in one place.' ul={
       <ul className='flex flex-col gap-3'> 
@@ -42,7 +125,7 @@ export default function Signup({}: Props) {
         </div>
       </div>
 
-      <form className='py-5' >
+      <form onSubmit={handleSignupSubmit} className='py-5' >
         <div className='gap-5'>
         <h1 className='text-[#28574E] text-[28px]'>Activate your account</h1>
         <p className='text-[#3E3B3B] text-[18px]'>Verify your hospital details to set up portal access.</p>
@@ -51,19 +134,20 @@ export default function Signup({}: Props) {
         <div className='mt-6'>
 
         <label className='text-[18px] mt-10 font-semibold' htmlFor="hospitalPatientId">Hospital Patient ID / User ID</label>
-        <Input id='hospitalPatientId' type='text' placeholder='Enter Patient ID' className='block mt-2' />
+        <Input id='patientId' type='text' onChange={handleSignupChange} value={signupData.patientId} placeholder='Enter Patient ID' name='patientId' className='block mt-2' />
+        {errors.patientId && <p className='text-red-500 text-sm'>{errors.patientId}</p>}
         </div>
 
         <div className='mt-4'>
         <label className='text-[18px] font-semibold' htmlFor="email">Email Address </label>
-        <Input id='email' type='text' placeholder='Enter your email address' className='block mt-2' />
-
+        <Input id='email' type='text' name='email' onChange={handleSignupChange} value={signupData.email} placeholder='Enter your email address' className='block mt-2' />
+        {errors.email && <p className='text-red-500 text-sm'>{errors.email}</p>}
         </div>
 
         <div className='mt-4'>
-        <label className='text-[18px] font-semibold' htmlFor="phoneNum">Registered Phone Number</label>
-        <Input id='phoneNum' type='tel' placeholder='(+234) 000-0000' className='block mt-2' />
-
+        <label className='text-[18px] font-semibold' htmlFor="mNumber">Registered Phone Number</label>
+        <Input id='mNumber' name='mNumber' type='tel' onChange={handleSignupChange} value={signupData.mNumber} placeholder='(+234) 000-0000' className='block mt-2' />
+        {errors.mNumber && <p className='text-red-500 text-sm'>{errors.mNumber}</p>}
         </div>
 
         <Button className='text-[18px] mt-6' type='submit' content='Verify Identity →' />
