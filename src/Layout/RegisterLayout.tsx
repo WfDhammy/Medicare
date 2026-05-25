@@ -29,7 +29,7 @@ export default function RegisterLayout({heading, subHeading,children,ul,image}: 
 
         </div>
             <div className='w-full md:w-1/2 px-6 md:px-20 py-10 md:py-15 flex items-center justify-center'>
-                <div className='w-full max-w-md'>
+                <div className='w-full max-w-md '>
                     {children}
                 </div>
 

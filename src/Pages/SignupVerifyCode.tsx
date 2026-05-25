@@ -17,20 +17,20 @@ export default function SignupVerifyCode() {
 
 
       <div className='w-full'>
-     <div className='flex items-center justify-between w-full gap-2 overflow-x-auto'>
+     <div className='flex items-center justify-between flex-shrink-0 w-full mx-auto gap-2 '>
         <div className='flex items-center gap-2 flex-shrink-0'>
           <p className='w-7 h-7 rounded-full bg-[#28574E] text-white text-[14px] flex items-center justify-center flex-shrink-0'>1</p>
           <span className='text-[#28574E] text-[14px] sm:text-[16px] font-medium'>Identity</span>
         </div>
 
-        <div className='flex w-[40px] sm:w-[77.5px] h-px bg-[#28574E] flex-shrink-0'></div>
+        <div className='flex w-[25px] sm:w-[30px] lg:[77.5px]   h-px bg-[#28574E] flex-shrink-0'></div>
 
         <div className='flex items-center gap-2 flex-shrink-0'>
           <p className='w-7 h-7 rounded-full bg-[#28574E] text-white text-[14px] flex items-center justify-center flex-shrink-0'>2</p>
-          <span className='text-[#28574E]   sm:text-[16px] font-medium '>OTP</span>
+          <span className='text-[#28574E] sm:text-[16px] font-medium '>OTP</span>
         </div>
 
-        <div className='flex w-[40px] sm:w-[77.5px] h-px bg-gray-300 flex-shrink-0'></div>
+        <div className='flex w-[25px] sm:w-[30px] lg:[77.5px] h-px bg-gray-300 flex-shrink-0'></div>
 
         <div className='flex items-center gap-2 flex-shrink-0'>
           <p className='w-7 h-7 rounded-full bg-gray-200 text-gray-500 text-[14px] flex items-center justify-center flex-shrink-0'>3</p>

@@ -11,7 +11,7 @@ type Props = {
 
 export default function Button({className,content,type,onClick}: Props) {
   return (
-    <button className={`z${className} bg-[#28574E] w-full h-[52px] rounded-md text-white cursor-pointer hover:bg-[#4F8379]`} type={type} >
+    <button className={`z${className} bg-[#28574E] w-full h-[52px] rounded-md text-white cursor-pointer hover:bg-[#4F8379]`} type={type} onClick={onClick} >
       {content}
     </button>
   )
